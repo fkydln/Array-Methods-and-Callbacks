@@ -1,35 +1,80 @@
 import { fifaData } from './fifa.js';
+console.clear();
 console.log(fifaData);
+function bFunc(paramB) {
+    return console.log(paramB);
+}
 
-console.log('its working');
+
+function aFunc(paramA) {
+    bFunc(paramA);
+}
+
+aFunc("Let's get this over with");
+//console.log('its working');
 // ⚽️ M  V P ⚽️ // Let's begin!
 
 /* Task 1: Investigate the data above. Practice accessing data by console.log-ing the following pieces of data 
 
 (a) Home Team name for 2014 world cup final
-(b) Away Team name for 2014 world cup final
+(b) Away Team name for 2014 world cup final 
 (c) Home Team goals for 2014 world cup final
 (d) Away Team goals for 2014 world cup final
 (e) Winner of 2014 world cup final */
 
+var resultA = fifaData.filter( item => item.Year === 2014);
+
+// for (let i = 0; i < resultA.length; i++) {
+//     console.log("Home Team Name " + resultA[i]["Home Team Name"]);
+// }
+// for (let i = 0; i < resultA.length; i++) {
+//     console.log("Away Team Name " + resultA[i]["Away Team Name"]);
+// }
+// for (let i = 0; i < resultA.length; i++) {
+//     console.log("Home Team Goals " + resultA[i]["Home Team Goals"]);
+// }
+// for (let i = 0; i < resultA.length; i++) {
+//     console.log("Away Team Goals " + resultA[i]["Away Team Goals"]);
+// }
+console.log(resultA);
+var homeTeamNames = resultA.map( param => param["Home Team Name"]);
+console.log(homeTeamNames);
+var awayTeamNames = resultA.map(param => param["Away Team Name"]);
+console.log(awayTeamNames);
+var homeTeamGoals = resultA.map(param => param["Home Team Goals"]);
+console.log(homeTeamGoals);
+var awayTeamGoals = resultA.map(param => param["Away Team Goals"]);
+console.log(awayTeamGoals);
+
+var winner = resultA.filter(param => param.Stage === "Final")
+if (winner[0]["Home Team Goals"] > winner[0]["Away Team Goals"]) {
+    console.log(winner[0]["Home Team Name"]);    
+}
+else{
+console.log(winner[0]["Away Team Name"]);    
+}
 
 /* Task 2: Create a function called  getFinals that takes `data` as an argument and returns an array of objects with only finals data */
 
-function getFinals(/* code here */) {
-
-    /* code here */
-
+function getFinals(data) {
+    var onlyFinals = data.filter(param => param.Stage === "Final")
+return console.log(onlyFinals);
 };
+getFinals(fifaData);
+console.clear()
 
 /* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
+    var years = [];
+function getYears(param) {
 
-function getYears(/* code here */) {
-
-    /* code here */
-
+    for (let i = 0; i < fifaData.length; i++) {
+        years.push(fifaData[i]["Year"]);
+    }
+    
+    return console.log(years);
 };
 
-getYears();
+getYears(getFinals);
 
 /* Task 4: Implement a higher-order function called `getWinners`, that accepts the callback function `getFinals()` and determine the winner (home or away) of each `finals` game. Return the name of all winning countries in an array called `winners` */ 
 
